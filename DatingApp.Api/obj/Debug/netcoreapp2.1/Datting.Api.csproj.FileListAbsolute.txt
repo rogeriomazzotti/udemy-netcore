@@ -1,0 +1,14 @@
+E:\MEUS DOCUMENTOS\Cursos\Udemy\.NET Core and Angular\DatingApp.Api\bin\Debug\netcoreapp2.1\Datting.Api.deps.json
+E:\MEUS DOCUMENTOS\Cursos\Udemy\.NET Core and Angular\DatingApp.Api\bin\Debug\netcoreapp2.1\Datting.Api.runtimeconfig.json
+E:\MEUS DOCUMENTOS\Cursos\Udemy\.NET Core and Angular\DatingApp.Api\bin\Debug\netcoreapp2.1\Datting.Api.runtimeconfig.dev.json
+E:\MEUS DOCUMENTOS\Cursos\Udemy\.NET Core and Angular\DatingApp.Api\bin\Debug\netcoreapp2.1\Datting.Api.dll
+E:\MEUS DOCUMENTOS\Cursos\Udemy\.NET Core and Angular\DatingApp.Api\bin\Debug\netcoreapp2.1\Datting.Api.pdb
+E:\MEUS DOCUMENTOS\Cursos\Udemy\.NET Core and Angular\DatingApp.Api\obj\Debug\netcoreapp2.1\Datting.Api.csprojAssemblyReference.cache
+E:\MEUS DOCUMENTOS\Cursos\Udemy\.NET Core and Angular\DatingApp.Api\obj\Debug\netcoreapp2.1\Datting.Api.csproj.CoreCompileInputs.cache
+E:\MEUS DOCUMENTOS\Cursos\Udemy\.NET Core and Angular\DatingApp.Api\obj\Debug\netcoreapp2.1\Datting.Api.RazorAssemblyInfo.cache
+E:\MEUS DOCUMENTOS\Cursos\Udemy\.NET Core and Angular\DatingApp.Api\obj\Debug\netcoreapp2.1\Datting.Api.RazorAssemblyInfo.cs
+E:\MEUS DOCUMENTOS\Cursos\Udemy\.NET Core and Angular\DatingApp.Api\obj\Debug\netcoreapp2.1\Datting.Api.AssemblyInfoInputs.cache
+E:\MEUS DOCUMENTOS\Cursos\Udemy\.NET Core and Angular\DatingApp.Api\obj\Debug\netcoreapp2.1\Datting.Api.AssemblyInfo.cs
+E:\MEUS DOCUMENTOS\Cursos\Udemy\.NET Core and Angular\DatingApp.Api\obj\Debug\netcoreapp2.1\Datting.Api.RazorTargetAssemblyInfo.cache
+E:\MEUS DOCUMENTOS\Cursos\Udemy\.NET Core and Angular\DatingApp.Api\obj\Debug\netcoreapp2.1\Datting.Api.dll
+E:\MEUS DOCUMENTOS\Cursos\Udemy\.NET Core and Angular\DatingApp.Api\obj\Debug\netcoreapp2.1\Datting.Api.pdb
