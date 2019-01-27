@@ -21,7 +21,8 @@ namespace DattingApp.Api.Controllers
         }
         // GET api/values
         
-        [HttpGet]
+        [AllowAnonymous]
+        [HttpGet] 
         public async Task<IActionResult> GetValues()
         {
             var values = await _context.Values.ToListAsync();
