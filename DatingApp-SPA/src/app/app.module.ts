@@ -21,7 +21,9 @@ import { ErrorInterceptorProvider } from "./_services/error.interceptor";
 import {
   BsDropdownModule,
   TabsModule,
-  BsDatepickerModule
+  BsDatepickerModule,
+  PaginationModule,
+  ButtonsModule
 } from "ngx-bootstrap";
 import { MemberListComponent } from "./members/member-list/member-list.component";
 import { ListsComponent } from "./lists/lists.component";
@@ -59,8 +61,10 @@ export function tokenGetter() {
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ButtonsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     NgxGalleryModule,
+    PaginationModule.forRoot(),
     TabsModule.forRoot(),
     FileUploadModule,
     JwtModule.forRoot({

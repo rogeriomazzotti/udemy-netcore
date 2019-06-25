@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace DatingApp.Api.Data
 
         public async Task<Photo> GetMainPhotoForUser(int userId)
         {
-            return await _context.Photos.Where(u=> u.UserId == userId).FirstOrDefaultAsync(p=> p.IsMain);
+            return await _context.Photos.Where(u => u.UserId == userId).FirstOrDefaultAsync(p => p.IsMain);
         }
 
         public async Task<Photo> GetPhoto(int id)
@@ -44,7 +45,30 @@ namespace DatingApp.Api.Data
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users =  _context.Users.Include(p => p.Photos);
+            var users = _context.Users.Include(p => p.Photos).AsQueryable();
+            users = users.Where(u => u.Id != userParams.UserId);
+            users = users.Where(u => u.Gender == userParams.Gender);
+
+            if (userParams.MinAge != 18 || userParams.MaxAge != 99)
+            {
+                var min = DateTime.Today.AddYears(-userParams.MaxAge - 1);
+                var max = DateTime.Today.AddYears(-userParams.MinAge);
+
+                users = users.Where(u => u.DateOfBIrth >= min && u.DateOfBIrth <= max);
+            }
+
+            if (!string.IsNullOrEmpty(userParams.OrderBy))
+            {
+                switch (userParams.OrderBy)
+                {
+                    case "created":
+                        users = users.OrderByDescending(d => d.Created);
+                        break;
+                    default:
+                        users = users.OrderByDescending(d => d.LastActive);
+                        break;
+                }
+            }
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
         }
 
