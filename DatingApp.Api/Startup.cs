@@ -32,9 +32,10 @@ namespace DattingApp.Api {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices (IServiceCollection services) {
             services.AddDbContext<DataContext> (x => {
-                x.UseLazyLoadingProxies();
-                x.UseSqlite (Configuration.GetConnectionString ("DefaultConnection"));
+                x.UseLazyLoadingProxies ();
+                x.UseMySql (Configuration.GetConnectionString ("DefaultConnection"));
             });
+
             services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1)
                 .AddJsonOptions (opt => {
                     opt.SerializerSettings.ReferenceLoopHandling =
@@ -82,7 +83,14 @@ namespace DattingApp.Api {
             }
 
             // app.UseHttpsRedirection();
-            //seeder.SeedUsers();
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory> ().CreateScope ()) {
+                var context = serviceScope.ServiceProvider.GetRequiredService<DataContext> ();
+                context.Database.Migrate ();
+                if (!context.Users.Any ())
+                    seeder.SeedUsers ();
+            }
+
+            //seeder.SeedUsers ();
             app.UseCors (x => x.AllowAnyOrigin ().AllowAnyMethod ().AllowAnyHeader ());
             app.UseAuthentication ();
             app.UseDefaultFiles ();
