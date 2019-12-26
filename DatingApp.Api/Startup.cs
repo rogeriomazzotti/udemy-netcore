@@ -36,7 +36,7 @@ namespace DattingApp.Api {
                 x.UseMySql (Configuration.GetConnectionString ("DefaultConnection"));
             });
 
-            services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1)
+            services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2)
                 .AddJsonOptions (opt => {
                     opt.SerializerSettings.ReferenceLoopHandling =
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -65,7 +65,7 @@ namespace DattingApp.Api {
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure (IApplicationBuilder app, IHostingEnvironment env, Seed seeder) {
+        public void Configure (IApplicationBuilder app, IHostingEnvironment env) {
             if (env.IsDevelopment ()) {
                 app.UseDeveloperExceptionPage ();
             } else {
@@ -83,14 +83,7 @@ namespace DattingApp.Api {
             }
 
             // app.UseHttpsRedirection();
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory> ().CreateScope ()) {
-                var context = serviceScope.ServiceProvider.GetRequiredService<DataContext> ();
-                context.Database.Migrate ();
-                if (!context.Users.Any ())
-                    seeder.SeedUsers ();
-            }
-
-            //seeder.SeedUsers ();
+          //seeder.SeedUsers ();
             app.UseCors (x => x.AllowAnyOrigin ().AllowAnyMethod ().AllowAnyHeader ());
             app.UseAuthentication ();
             app.UseDefaultFiles ();
