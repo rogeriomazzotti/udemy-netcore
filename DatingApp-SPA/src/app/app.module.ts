@@ -1,5 +1,5 @@
-import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
-import { MessagesResolver } from './_resolvers/messages.resolver';
+import { MemberMessagesComponent } from "./members/member-messages/member-messages.component";
+import { MessagesResolver } from "./_resolvers/messages.resolver";
 import { PhotoEditorComponent } from "./members/photo-editor/photo-editor.component";
 import { MemberEditComponent } from "./members/member-edit/member-edit.component";
 import { MemberListResolver } from "./_resolvers/member-list.resolver";
@@ -9,7 +9,8 @@ import { AuthGuard } from "./_guards/auth.guard";
 import { appRoutes } from "./routes";
 import { AlertifyService } from "./_services/alertify.service";
 import { AuthService } from "./_services/auth.service";
-import { BrowserModule } from "@angular/platform-browser";
+import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
@@ -37,9 +38,16 @@ import { MemberEditResolver } from "./_resolvers/member-edit.resolver";
 import { PreventUnsavedChanges } from "./_guards/prevent-unsaved-changes.guard";
 import { FileUploadModule } from "ng2-file-upload";
 import { TimeAgoPipe } from "time-ago-pipe";
-import { ListsResolver } from './_resolvers/lists.resolver';
+import { ListsResolver } from "./_resolvers/lists.resolver";
 export function tokenGetter() {
   return localStorage.getItem("token");
+}
+
+export class CustomHammerConfig extends HammerGestureConfig {
+  overrides = {
+    pinch: { enable: false },
+    rotate: { enable: false }
+  };
 }
 
 @NgModule({
@@ -60,6 +68,7 @@ export function tokenGetter() {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -90,7 +99,8 @@ export function tokenGetter() {
     MemberEditResolver,
     PreventUnsavedChanges,
     ListsResolver,
-    MessagesResolver
+    MessagesResolver,
+    { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
   ],
   bootstrap: [AppComponent]
 })
