@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,15 +36,16 @@ namespace DattingApp.Api {
                 x.UseMySql (Configuration.GetConnectionString ("DefaultConnection"));
             });
 
-            services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2)
-                .AddJsonOptions (opt => {
+            services.AddControllers ()
+                .AddNewtonsoftJson(opt => {
                     opt.SerializerSettings.ReferenceLoopHandling =
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
+
             services.AddCors ();
 
             services.Configure<CloudinarySettings> (Configuration.GetSection ("CloudinarySettings"));
-            services.AddAutoMapper ();
+            services.AddAutoMapper (typeof(Startup));
             services.AddTransient<Seed> ();
 
             services.AddScoped<IAuthRepository, AuthRepository> ();
@@ -65,7 +66,7 @@ namespace DattingApp.Api {
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure (IApplicationBuilder app, IHostingEnvironment env) {
+        public void Configure (IApplicationBuilder app, IWebHostEnvironment env) {
             if (env.IsDevelopment ()) {
                 app.UseDeveloperExceptionPage ();
             } else {
@@ -79,24 +80,25 @@ namespace DattingApp.Api {
                         }
                     });
                 });
-                app.UseHsts ();
+                //app.UseHsts ();
             }
 
             // app.UseHttpsRedirection();
-          //seeder.SeedUsers ();
-            app.UseCors (x => x.AllowAnyOrigin ().AllowAnyMethod ().AllowAnyHeader ());
+            app.UseRouting ();
+
+            app.UseAuthorization ();
             app.UseAuthentication ();
+
+            app.UseCors (x => x.AllowAnyOrigin ().AllowAnyMethod ().AllowAnyHeader ());
+
             app.UseDefaultFiles ();
             app.UseStaticFiles ();
-            app.UseMvc (routes => {
-                routes.MapSpaFallbackRoute (
-                    name: "spa-fallback",
-                    defaults : new {
-                        controller = "Fallback",
-                            action = "Index"
-                    }
-                );
+
+            app.UseEndpoints (endPoints => {
+                endPoints.MapControllers ();
+                endPoints.MapFallbackToController ("Index", "Fallback");
             });
+
         }
     }
 }
