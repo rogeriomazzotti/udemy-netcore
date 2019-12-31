@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DattingApp.Api.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
