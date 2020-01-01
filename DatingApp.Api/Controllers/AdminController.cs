@@ -23,7 +23,7 @@ namespace DatingApp.Api.Controllers
 
         }
 
-        [Authorize(Policy = "RequiredAdminRole")]
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpGet("usersWithRoles")]
         public async Task<IActionResult> GetUsersWithRoles()
         {
@@ -43,7 +43,7 @@ namespace DatingApp.Api.Controllers
             return Ok(userList);
         }
 
-        [Authorize(Policy = "RequiredAdminRole")]
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("editRoles/{userName}")]
         public async Task<IActionResult> EditRoles(string userName, RoleEditDto roleEditDto)
         {

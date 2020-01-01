@@ -21,7 +21,7 @@ namespace DattingApp.Api.Controllers
         }
         // GET api/values
         
-        [AllowAnonymous]
+        [Authorize(Roles="Admin")]
         [HttpGet] 
         public async Task<IActionResult> GetValues()
         {

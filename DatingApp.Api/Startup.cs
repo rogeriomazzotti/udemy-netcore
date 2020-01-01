@@ -62,7 +62,7 @@ namespace DattingApp.Api
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("RequiredAdminRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
                 options.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin, Moderator"));
                 options.AddPolicy("VipOnly", policy => policy.RequireRole("VIP"));
 
@@ -128,8 +128,8 @@ namespace DattingApp.Api
             // app.UseHttpsRedirection();
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 

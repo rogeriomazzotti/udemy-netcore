@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using DatingApp.Api.Data;
 using DatingApp.Api.Dtos;
 using DatingApp.Api.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -72,7 +71,7 @@ namespace DatingApp.Api.Controllers
 
                 return Ok(new
                 {
-                    token = GenerateJwtToken(user),
+                    token = await GenerateJwtToken(user),
                     user = appUser
                 });
             }
