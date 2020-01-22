@@ -83,6 +83,9 @@ namespace Datting.Api.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("IsMain")
                         .HasColumnType("tinyint(1)");
 

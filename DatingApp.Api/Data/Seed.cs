@@ -33,16 +33,9 @@ namespace DatingApp.Api.Data
 
                 foreach (var user in users)
                 {
+                    user.Photos.SingleOrDefault().IsApproved = true;
                     userManager.CreateAsync(user, "password").Wait();
                     userManager.AddToRoleAsync(user, "Member").Wait();
-                    // byte[] passwordHash, passwordSalt;
-
-                    // CreatePasswordHash ("password", out passwordHash, out passwordSalt);
-                    // // user.PasswordHash = passwordHash;
-                    // // user.PasswordSalt = passwordSalt;
-                    // user.UserName = user.UserName.ToLower ();
-
-                    // context.Users.Add (user);
                 }
 
                 //create admin
